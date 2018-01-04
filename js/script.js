@@ -66,7 +66,7 @@ GameOfLife.prototype.createNeighbors = function (x, y) {
             this.position(x - 1, y + 1),
             this.position(x, y + 1)
         ];
-    } else if (x === this.boardWidth - 1 && y === this.boardHeight - 1) {
+    } else if (x === (this.boardWidth - 1) && y === (this.boardHeight - 1)) {
         neighbors = [
             this.position(x - 1, y - 1),
             this.position(x, y - 1),
@@ -78,7 +78,7 @@ GameOfLife.prototype.createNeighbors = function (x, y) {
             this.position(x + 1, y - 1),
             this.position(x + 1, y)
         ];
-    } else if (y === 0 && x > 0 || y === 0 && x < this.boardWidth) {
+    } else if (y === 0 && x > 0 && x < this.boardWidth) {
         neighbors = [
             this.position(x - 1, y),
             this.position(x + 1, y),
@@ -86,7 +86,7 @@ GameOfLife.prototype.createNeighbors = function (x, y) {
             this.position(x, y + 1),
             this.position(x + 1, y + 1)
         ];
-    } else if (x === 0 && y > 0 || x === 0 && y < this.boardHeight) {
+    } else if (x === 0 && y > 0 && y < this.boardHeight) {
         neighbors = [
             this.position(x, y - 1),
             this.position(x + 1, y - 1),
@@ -94,7 +94,7 @@ GameOfLife.prototype.createNeighbors = function (x, y) {
             this.position(x, y + 1),
             this.position(x + 1, y + 1)
         ];
-    } else if (y === this.boardHeight - 1 && x > 0 || y === this.boardHeight - 1 && x < this.boardWidth) {
+    } else if (y === (this.boardHeight - 1) && 0< x < this.boardWidth) {
         neighbors = [
             this.position(x - 1, y - 1),
             this.position(x, y - 1),
@@ -102,13 +102,13 @@ GameOfLife.prototype.createNeighbors = function (x, y) {
             this.position(x - 1, y),
             this.position(x + 1, y)
         ];
-    } else if (x === 0 && y > 0 || x === 0 && y < this.boardHeight) {
+    } else if (x === this.boardWidth - 1 && 0 < y < this.boardHeight) {
         neighbors = [
             this.position(x, y - 1),
-            this.position(x + 1, y - 1),
-            this.position(x + 1, y),
+            this.position(x - 1, y - 1),
             this.position(x, y + 1),
-            this.position(x + 1, y + 1)
+            this.position(x - 1, y + 1),
+            this.position(x - 1, y),
         ];
     } else {
         neighbors = [
@@ -139,22 +139,22 @@ GameOfLife.prototype.createNeighbors = function (x, y) {
             
         });
         if (this.position(x, y).classList.contains('live') && lifeNeighbours.length<2){
-            console.log ('op1', 0);
+            
             return 0
         };
         if (this.position(x, y).classList.contains('live') && (lifeNeighbours.length===2||lifeNeighbours.length===3)){
-            console.log ('op2', 1)
+            
             return 1;
         };
         if (this.position(x, y).classList.contains('live') && lifeNeighbours.length>3){
-            console.log('op3', 0)
+            
             return 0;
         };
         if ((!this.position(x, y).classList.contains('live')) && lifeNeighbours.length===3){
-            console.log ('op4', 1)
+            
             return 1;
         }else{
-            console.log('op5', 0)
+            
             return 0
         };
     };
@@ -162,19 +162,20 @@ GameOfLife.prototype.createNeighbors = function (x, y) {
         GameOfLife.prototype.computeNextGeneration=function(){
             var nextGeneration=[];
             for (var y=0; y<this.boardHeight; y++){
+                console.log ('y', y)
                 for (var x=0; x<this.boardWidth; x++){
-                    this.computeCellNextState(x, y);
-                    
+                    console.log('x', x)
+                    nextGeneration.push(this.computeCellNextState(x, y));   
                 }
-                console.log (nextGeneration)
+                console.log ('nextGeneration', nextGeneration)
             }
-             return nextGeneration.push(this.position(x, y))      
+             return nextGeneration
         };
 
     
 
 
-var game = new GameOfLife (20, 20);
+var game = new GameOfLife (5, 5);
 game.createBoard();
 game.firstGlider(1, 1, 'live');
 //game.computeCellNextState(7, 5 );
