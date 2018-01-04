@@ -30,3 +30,6 @@ body {
     margin: 50px auto;
     width: auto;
 }
+.invisible{
+    display: none;
+}
