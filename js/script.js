@@ -50,33 +50,84 @@ function GameOfLife(height,width){
         this.setCellState(x-1, y+1, state);
     };
  
-    GameOfLife.prototype.createNeigbours=function(x, y){
-        var neighbours=[];
-        if ((x===0) && (y===0)){
-             neighbours=[this.position(x+1, y+1), this.position(x+1, y), this.position(x, y+1)]
-        }
-        if ((x===0) && (y>0) && (y<this.boardHeight)){
-            neighbours=[this.position(x, y-1), this.position(x+1, y), this.position(x+1, y+1), this.position(x+1, y-1), this.position(x, y+1)]
-        }
-        if ((x>0) && (x<this.boardWidth) && (y===0)){
-            neighbours=[this.position(x-1, y), this.position(x-1, y+1), this.position(x, y+1), this.position(x+1, y), this.position(x+1, y+1)]
-        }
-        if (x===(this.boardWidth-1) && y===0){
-            neighbours=[this.position(x, y+1), this.position(x-1, y), this.position(x-1, y+1)];
-        }
-        if ((x===this.boardWidth-1) && y===(this.boardHeight-1)){
-            neighbours=[this.position(x-1, y-1), this.position(x-1, y), this.position(x, y-1)]
-        }
-        if (x===0 && y===this.boardHeight-1){
-            neighbours=[this.position(x, y-1), this.position(x+1, y), this.position(x+1, y-1)]
-        }
-        if (x===0 && y===
-    }
+    
+GameOfLife.prototype.createNeighbors = function (x, y) {
+    var neighbors = [];
 
+    if (x === 0 && y === 0) {
+        neighbors = [
+            this.position(x + 1, y),
+            this.position(x, y + 1),
+            this.position(x + 1, y + 1)
+        ];
+    } else if (x === this.boardWidth - 1 && y === 0) {
+        neighbors = [
+            this.position(x - 1, y),
+            this.position(x - 1, y + 1),
+            this.position(x, y + 1)
+        ];
+    } else if (x === this.boardWidth - 1 && y === this.boardHeight - 1) {
+        neighbors = [
+            this.position(x - 1, y - 1),
+            this.position(x, y - 1),
+            this.position(x - 1, y)
+        ];
+    } else if (x === 0 && y === this.boardHeight - 1) {
+        neighbors = [
+            this.position(x, y - 1),
+            this.position(x + 1, y - 1),
+            this.position(x + 1, y)
+        ];
+    } else if (y === 0 && x > 0 || y === 0 && x < this.boardWidth) {
+        neighbors = [
+            this.position(x - 1, y),
+            this.position(x + 1, y),
+            this.position(x - 1, y + 1),
+            this.position(x, y + 1),
+            this.position(x + 1, y + 1)
+        ];
+    } else if (x === 0 && y > 0 || x === 0 && y < this.boardHeight) {
+        neighbors = [
+            this.position(x, y - 1),
+            this.position(x + 1, y - 1),
+            this.position(x + 1, y),
+            this.position(x, y + 1),
+            this.position(x + 1, y + 1)
+        ];
+    } else if (y === this.boardHeight - 1 && x > 0 || y === this.boardHeight - 1 && x < this.boardWidth) {
+        neighbors = [
+            this.position(x - 1, y - 1),
+            this.position(x, y - 1),
+            this.position(x + 1, y - 1),
+            this.position(x - 1, y),
+            this.position(x + 1, y)
+        ];
+    } else if (x === 0 && y > 0 || x === 0 && y < this.boardHeight) {
+        neighbors = [
+            this.position(x, y - 1),
+            this.position(x + 1, y - 1),
+            this.position(x + 1, y),
+            this.position(x, y + 1),
+            this.position(x + 1, y + 1)
+        ];
+    } else {
+        neighbors = [
+            this.position(x - 1, y - 1),
+            this.position(x, y - 1),
+            this.position(x + 1, y - 1),
+            this.position(x - 1, y),
+            this.position(x + 1, y),
+            this.position(x - 1, y + 1),
+            this.position(x, y + 1),
+            this.position(x + 1, y + 1)
+        ];
+    }
+    return neighbors;
+    }
 
     GameOfLife.prototype.computeCellNextState=function (x, y){
         var lifeNeighbours=[];
-        var neighbours=this.createNeigbours(x,y)
+         var neighbours = this.createNeighbors(x, y);
         console.log('neighbours', neighbours)
         neighbours.forEach(function(neighbour){
             if (neighbour.classList.contains('live')){
@@ -102,22 +153,22 @@ function GameOfLife(height,width){
         if ((!this.position(x, y).classList.contains('live')) && lifeNeighbours.length===3){
             console.log ('op4', 1)
             return 1;
+        }else{
+            console.log('op5', 0)
+            return 0
         };
     };
 
         GameOfLife.prototype.computeNextGeneration=function(){
             var nextGeneration=[];
-            for (var y=0; y<this.boardHeight; i++){
-                for (var x=0; x<this.boardWidth; i++){
+            for (var y=0; y<this.boardHeight; y++){
+                for (var x=0; x<this.boardWidth; x++){
                     this.computeCellNextState(x, y);
                     
                 }
                 console.log (nextGeneration)
             }
-             return nextGeneration.push(this.position(x, y))
-
-                
-           
+             return nextGeneration.push(this.position(x, y))      
         };
 
     
@@ -125,9 +176,9 @@ function GameOfLife(height,width){
 
 var game = new GameOfLife (20, 20);
 game.createBoard();
-//game.firstGlider(0, 0, 'live');
-//game.computeCellNextState(1,1);
-//game.computeNextGeneration(0, 0);
+game.firstGlider(1, 1, 'live');
+//game.computeCellNextState(7, 5 );
+game.computeNextGeneration();
 
 
 
