@@ -6,10 +6,8 @@ function GameOfLife(height,width){
     this.cells=[];
     };
     GameOfLife.prototype.createBoard=function(){
-        this.board.style.width = 15 * this.boardWidth + 'px';
-        this.board.style.height = 15 * this.boardHeight + 'px';
-        console.log(this.boardHeight);
-        console.log(this.boardWidth); 
+        this.board.style.width = 20 * this.boardWidth + 'px';
+        this.board.style.height = 20 * this.boardHeight + 'px';
         var allCells = this.boardHeight * this.boardWidth;
          
          for (var i = 0; i < allCells; i++) {
@@ -170,14 +168,14 @@ GameOfLife.prototype.createNeighbors = function (x, y) {
         };
         GameOfLife.prototype.printNextGeneration=function(){
             var nextGen=this.computeNextGeneration();
-            console.log ('nextGen', nextGen);
+            
             for (var i=0; i<nextGen.length; i++){
-                console.log (nextGen[i])
+                
                 if (nextGen[i]===1){
                     this.cells[i].classList.add('live')   
                 }else{
                     this.cells[i].classList.remove('live')
-                    console.log ('this.cells', this.cells)
+                   
                 }
             }
                 return this.cells;    
@@ -185,10 +183,10 @@ GameOfLife.prototype.createNeighbors = function (x, y) {
         };
         GameOfLife.prototype.startAnimation=function(){
             var self=this;
-            console.log ('self', self)
+            
             var myInterval = setInterval(function () {
                    self.printNextGeneration();
-                       }, 3000);
+                       }, 2000);
             var pause = document.querySelector('#pause');
             pause.addEventListener('click', pauseGame);
                  function pauseGame(e) {
@@ -218,7 +216,7 @@ var game = new GameOfLife()
 game.createBoard();
 //game.setCellState(0, 0, 'live')
 game.firstGlider(1, 2, 'live');
-game.playGame()
+game.playGame();
 }
 
 

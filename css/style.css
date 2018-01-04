@@ -9,8 +9,8 @@ body {
 }
 
 #board div {
-    width: 15px;
-    height: 15px;
+    width: 20px;
+    height: 20px;
     border: 1px solid #cccccc;
     background-color: #ffffff;
     float: left;
@@ -22,8 +22,8 @@ body {
 
 #board {
     margin: 50px auto 0;
-    min-height: 50px;
-    min-width: 50px
+    min-height: 100px;
+    min-width: 100px
 }
 
 #game-menu {
