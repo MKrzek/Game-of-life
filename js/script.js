@@ -49,22 +49,41 @@ function GameOfLife(height,width){
         this.setCellState(x+1, y+1, state);
         this.setCellState(x-1, y+1, state);
     };
+ 
+    GameOfLife.prototype.createNeigbours=function(x, y){
+        var neighbours=[];
+        if ((x===0) && (y===0)){
+             neighbours=[this.position(x+1, y+1), this.position(x+1, y), this.position(x, y+1)]
+        }
+        if ((x===0) && (y>0) && (y<this.boardHeight)){
+            neighbours=[this.position(x, y-1), this.position(x+1, y), this.position(x+1, y+1), this.position(x+1, y-1), this.position(x, y+1)]
+        }
+        if ((x>0) && (x<this.boardWidth) && (y===0)){
+            neighbours=[this.position(x-1, y), this.position(x-1, y+1), this.position(x, y+1), this.position(x+1, y), this.position(x+1, y+1)]
+        }
+        if (x===(this.boardWidth-1) && y===0){
+            neighbours=[this.position(x, y+1), this.position(x-1, y), this.position(x-1, y+1)];
+        }
+        if ((x===this.boardWidth-1) && y===(this.boardHeight-1)){
+            neighbours=[this.position(x-1, y-1), this.position(x-1, y), this.position(x, y-1)]
+        }
+        if (x===0 && y===this.boardHeight-1){
+            neighbours=[this.position(x, y-1), this.position(x+1, y), this.position(x+1, y-1)]
+        }
+        if (x===0 && y===
+    }
+
+
     GameOfLife.prototype.computeCellNextState=function (x, y){
         var lifeNeighbours=[];
-        var neighbour1=this.position(x-1, y-1);
-        var neighbour2=this.position(x, y-1);
-        var neighbour3=this.position(x+1, y-1);
-        var neighbour4=this.position(x-1, y);
-        var neighbour5=this.position(x+1, y);
-        var neighbour6=this.position(x-1, y+1);
-        var neighbour7=this.position(x, y+1);
-        var neighbour8=this.position(x+1, y+1);
-        var neighbours= [neighbour1, neighbour2, neighbour3, neighbour4, neighbour5, neighbour6, neighbour7, neighbour8];
+        var neighbours=this.createNeigbours(x,y)
+        console.log('neighbours', neighbours)
         neighbours.forEach(function(neighbour){
             if (neighbour.classList.contains('live')){
                 lifeNeighbours.push(neighbour);
                 console.log (neighbour);
             };
+            
             return lifeNeighbours;
             
         });
@@ -84,22 +103,32 @@ function GameOfLife(height,width){
             console.log ('op4', 1)
             return 1;
         };
-
     };
 
+        GameOfLife.prototype.computeNextGeneration=function(){
+            var nextGeneration=[];
+            for (var y=0; y<this.boardHeight; i++){
+                for (var x=0; x<this.boardWidth; i++){
+                    this.computeCellNextState(x, y);
+                    
+                }
+                console.log (nextGeneration)
+            }
+             return nextGeneration.push(this.position(x, y))
 
+                
+           
+        };
 
-
-
-
-
-
+    
 
 
 var game = new GameOfLife (20, 20);
 game.createBoard();
-game.firstGlider(1, 1, 'live');
-game.computeCellNextState(1,1)
+//game.firstGlider(0, 0, 'live');
+//game.computeCellNextState(1,1);
+//game.computeNextGeneration(0, 0);
+
 
 
 
