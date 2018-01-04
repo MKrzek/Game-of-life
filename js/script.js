@@ -42,7 +42,7 @@ function GameOfLife(height,width){
     };
 
     GameOfLife.prototype.firstGlider=function(x, y, state){
-        console.log (this);
+       
         this.setCellState(x, y, state);
         this.setCellState(x-1, y-1, state);
         this.setCellState(x, y-1, state);
@@ -162,17 +162,15 @@ GameOfLife.prototype.createNeighbors = function (x, y) {
         GameOfLife.prototype.computeNextGeneration=function(){
             var nextGeneration=[];
             for (var y=0; y<this.boardHeight; y++){
-                console.log ('y', y)
-                for (var x=0; x<this.boardWidth; x++){
-                    console.log('x', x)
+                for (var x=0; x<this.boardWidth; x++){   
                     nextGeneration.push(this.computeCellNextState(x, y));   
                 }
-                console.log ('nextGeneration', nextGeneration)
+                
             }
              return nextGeneration
         };
         GameOfLife.prototype.printNextGeneration=function(){
-            var newcells=[]
+            
             var nextGen=this.computeNextGeneration();
             console.log ('nextGen', nextGen);
             for (var i=0; i<nextGen.length; i++){
@@ -182,24 +180,41 @@ GameOfLife.prototype.createNeighbors = function (x, y) {
                 }else{
                     this.cells[i].classList.remove('live')
                     console.log ('this.cells', this.cells)
-                
+                }
+            }
                 return this.cells;    
+        
         }
+        GameOfLife.prototype.startAnimation=function(){
+            var self=this;
+            console.log ('self', self)
+            var myInterval = setInterval(function () {
+                   self.printNextGeneration();
+                       }, 3000);
+            var pause = document.querySelector('#pause');
+            pause.addEventListener('click', pauseGame);
+                 function pauseGame(e) {
+                        clearInterval(myInterval)
+};
         }
-    }
-
-    
-
+        GameOfLife.prototype.gamePlay=function(){
+            var self=this;
+            var play = document.querySelector('#play');
+            play.addEventListener('click', startAnimation)
+            function startAnimation(e){
+                self.startAnimation();
+            }
+        }
 
 var game = new GameOfLife (5, 5);
 game.createBoard();
-//game.computeCellNextState(0, 0);
-game.setCellState(1, 1, 'live')
-game.firstGlider(3, 3, 'live');
+game.setCellState(0, 0, 'live')
+game.firstGlider(1, 2, 'live');
+game.gamePlay()
 
 
-//game.computeNextGeneration();
-game.printNextGeneration()
+
+
 
 
 
