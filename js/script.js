@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', function(){
 function GameOfLife(height,width){
-    this.boardWidth=prompt('podaj szerokos')
-    this.boardHeight=prompt('podaj dlugosc')
+    this.boardWidth=prompt('Set the width of the board')
+    this.boardHeight=prompt('Set the height of the board')
     this.board=document.querySelector('#board');
     this.cells=[];
     };
@@ -126,7 +126,6 @@ GameOfLife.prototype.createNeighbors = function (x, y) {
     GameOfLife.prototype.computeCellNextState=function (x, y){
         var lifeNeighbours=[];
          var neighbours = this.createNeighbors(x, y);
-        
         neighbours.forEach(function(neighbour){
             if (neighbour.classList.contains('live')){
                 lifeNeighbours.push(neighbour);
@@ -168,7 +167,6 @@ GameOfLife.prototype.createNeighbors = function (x, y) {
         };
         GameOfLife.prototype.printNextGeneration=function(){
             var nextGen=this.computeNextGeneration();
-            
             for (var i=0; i<nextGen.length; i++){
                 
                 if (nextGen[i]===1){
@@ -183,7 +181,6 @@ GameOfLife.prototype.createNeighbors = function (x, y) {
         };
         GameOfLife.prototype.startAnimation=function(){
             var self=this;
-            
             var myInterval = setInterval(function () {
                    self.printNextGeneration();
                        }, 2000);
