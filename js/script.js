@@ -183,7 +183,7 @@ GameOfLife.prototype.createNeighbors = function (x, y) {
             var self=this;
             var myInterval = setInterval(function () {
                    self.printNextGeneration();
-                       }, 2000);
+                       }, 1000);
             var pause = document.querySelector('#pause');
             pause.addEventListener('click', pauseGame);
                  function pauseGame(e) {

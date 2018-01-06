@@ -5,19 +5,19 @@
 body {
     margin: 0;
     padding: 0;
-    background-color: #cccccc;
+    background-color:#f8f9fa;
 }
 
 #board div {
     width: 20px;
     height: 20px;
-    border: 1px solid #cccccc;
-    background-color: #ffffff;
+    border: 1px solid rgb(59, 143, 108);
+    background-color:rgb(246, 248, 247); 
     float: left;
 }
 
 #board div.live {
-    background-color: #000000;
+    background-color: #20c997;
 }
 
 #board {
