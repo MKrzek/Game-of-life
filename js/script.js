@@ -1,3 +1,5 @@
+import swal from 'sweetalert'
+
 document.addEventListener('DOMContentLoaded', function(){
 function GameOfLife(height,width){
     this.boardWidth=prompt('Set the width of the board')
@@ -198,8 +200,9 @@ GameOfLife.prototype.createNeighbors = function (x, y) {
                 self.startAnimation();
             }
 
-        };
-
+        }
+    
+        
 
 
 var play =document.querySelector('#play');
@@ -209,6 +212,7 @@ start.addEventListener('click', startGame)
 function startGame(){
     play.classList.remove('invisible')
     pause.classList.remove('invisible')
+    start.classList.add('invisible')
 var game = new GameOfLife()
 game.createBoard();
 //game.setCellState(0, 0, 'live')
