@@ -1,4 +1,4 @@
-import swal from 'sweetalert'
+
 
 document.addEventListener('DOMContentLoaded', function(){
 function GameOfLife(height,width){
